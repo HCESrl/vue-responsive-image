@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Test web version of plugin</title>
+</head>
+<body>
+<div id="app">
+  <h1>{{ test }}</h1>
+  <vue-responsive-image :width-on-screen="50" :image-url="'http://via.placeholder.com/%width%x%height%'" :image-ratio="16/9"></vue-responsive-image>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script type="text/javascript" src="../dist/vue-responsive-image.web.min.js"></script>
+<script type="text/javascript">
+
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      'test':'This is a test'
+    }
+  })
+
+</script>
+</body>
+</html>
+<script>
+</script>

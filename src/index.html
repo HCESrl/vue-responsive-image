@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Plugin development</title>
+  <style type="text/css">
+    .vw50 {
+      width: 50%;
+    }
+    .vw33 {
+      width: 33%;
+    }
+  </style>
+</head>
+<body>
+<!-- this page is where you test your plugin during development -->
+<div id="app">
+  <h1>{{ test }}</h1>
+  <vue-responsive-image
+    :width-on-screen="50"
+    :image-url="'http://via.placeholder.com/%width%x%height%'"
+    :image-ratio="16/9"
+    :alt="'test1'"
+    :image-class="'vw50'"
+    :mode="'mobile'"
+
+  ></vue-responsive-image>
+</div>
+
+
+</body>
+</html>
