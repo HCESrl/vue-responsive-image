@@ -64,19 +64,22 @@ export default {
     },
     // percentage of screen occupied by image on tablet portrait, in numbers, if not set it uses witdhOnScreen
     widthOnScreenTablet: {
-      type: Number
+      type: Number,
+      default: undefined
     },
     // percentage of screen occupied by image on smartphone, in numbers, if not set it uses witdhOnScreen
     widthOnScreenSmartphone: {
-      type: Number
+      type: Number,
+      default: undefined
     },
     // ratio of height respective to width, defaults to 16/9
     imageRatio: {
       type: Number,
-      default: 16/9
+      default: 16 / 9
     },
     alt: {
-      type: String
+      type: String,
+      default: ''
     },
     imageClass: {
       type: String,

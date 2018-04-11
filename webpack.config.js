@@ -2,6 +2,7 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const path = require('path')
 const HtmlWebPackPlugin = require("html-webpack-plugin")
+const nodeExternals = require('webpack-node-externals')
 
 var commonConfig = {
   resolve: {
@@ -47,9 +48,14 @@ var commonConfig = {
 }
 
 module.exports = function(env, argv) {
-  switch(argv.mode) {
+  if (typeof argv === 'undefined') {
+    argv = {
+      mode: 'test'
+    }
+  }
+  switch (argv.mode) {
     case 'production':
-      return [    // Config 1: For browser environment
+      return [ // Config 1: For browser environment
         merge(commonConfig, {
           entry: path.resolve(__dirname + '/src/plugin.js'),
           output: {
@@ -71,9 +77,14 @@ module.exports = function(env, argv) {
           }
         })
       ]
-    break;
+    case 'test':
+      return merge(commonConfig, {
+        mode: 'development',
+        externals: [nodeExternals()],
+        devtool: 'inline-cheap-module-source-map'
+      })
     case 'development':
-      return  merge(commonConfig, {
+      return merge(commonConfig, {
         entry: path.resolve(__dirname + '/src/index.js'),
         output: {
           path: path.resolve(__dirname + '/dev/'),
@@ -90,13 +101,9 @@ module.exports = function(env, argv) {
           host: '0.0.0.0',
           disableHostCheck: true,
 
-        },
+        }
       })
     default:
       console.error('mode not found')
   }
-
 }
-
-
-
