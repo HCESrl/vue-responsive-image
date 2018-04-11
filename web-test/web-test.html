@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>Test web version of plugin</title>
   <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
-  <title>Responsive image plugin</title>
   <style type="text/css">
     body {
+      padding: 0;
       margin: 0;
+      font-family: sans-serif;
     }
-    h1, h2, h3 {
+    h1, h2, h3, p {
       padding: 5px;
     }
     .vw50 {
@@ -33,9 +35,9 @@
   </style>
 </head>
 <body>
-<!-- this page is where you test your plugin during development -->
 <div id="app">
-  <h1>{{ title }}</h1>
+  <h1>{{ test }}</h1>
+  <p>(Make sure you've run <i>npm run build</i> to build the package before you check this page)</p>
   <vue-responsive-image
     :width-on-screen="50"
     :width-on-screen-tablet="75"
@@ -47,7 +49,19 @@
     :mode="'all'"
   ></vue-responsive-image>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script type="text/javascript" src="../dist/vue-responsive-image.web.min.js"></script>
+<script type="text/javascript">
 
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      'test':'This is a test'
+    }
+  })
 
+</script>
 </body>
 </html>
+<script>
+</script>

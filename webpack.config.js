@@ -47,7 +47,6 @@ var commonConfig = {
 }
 
 module.exports = function(env, argv) {
-  console.log('env', env)
   switch(argv.mode) {
     case 'production':
       return [    // Config 1: For browser environment
@@ -74,7 +73,6 @@ module.exports = function(env, argv) {
       ]
     break;
     case 'development':
-      console.log('HEREREEERERE --------------')
       return  merge(commonConfig, {
         entry: path.resolve(__dirname + '/src/index.js'),
         output: {
@@ -86,7 +84,13 @@ module.exports = function(env, argv) {
             template: "./src/index.html",
             filename: "./index.html"
           })
-        ]
+        ],
+        devServer: {
+          useLocalIp: true,
+          host: '0.0.0.0',
+          disableHostCheck: true,
+
+        },
       })
     default:
       console.error('mode not found')
