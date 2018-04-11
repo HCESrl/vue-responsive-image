@@ -7,6 +7,13 @@
     .vw50 {
       width: 50%;
     }
+
+    @media screen and (max-width: 1023px) {
+      .vw50 {
+        width: 100%;
+      }
+    }
+
     .vw33 {
       width: 33%;
     }
@@ -18,12 +25,12 @@
   <h1>{{ test }}</h1>
   <vue-responsive-image
     :width-on-screen="50"
+    :width-on-screen-tablet="100"
     :image-url="'http://via.placeholder.com/%width%x%height%'"
     :image-ratio="16/9"
     :alt="'test1'"
     :image-class="'vw50'"
-    :mode="'mobile'"
-
+    :mode="'all'"
   ></vue-responsive-image>
 </div>
 

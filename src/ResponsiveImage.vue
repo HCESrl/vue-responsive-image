@@ -1,5 +1,6 @@
 <template>
   <picture>
+    <source v-if="hasTabletSrcset" :srcset="tabletSrcset" :sizes="tabletSizes" media="(max-width: 1023px)">
     <img :src="defaultImage" :alt="alt" :class="[defaultClass, imageClass]" :srcset="srcset" :sizes="sizes">
   </picture>
 </template>
@@ -60,11 +61,11 @@
         type: Number,
         default: 100
       },
-      // percentage of screen occupied by image on tablet portrait, in numbers, defaults to 100
+      // percentage of screen occupied by image on tablet portrait, in numbers, if not set it uses witdhOnScreen
       widthOnScreenTablet: {
         type: Number
       },
-      // percentage of screen occupied by image on smartphone, in numbers, defaults to 100
+      // percentage of screen occupied by image on smartphone, in numbers, if not set it uses witdhOnScreen
       widthOnScreenSmartphone: {
         type: Number
       },
@@ -99,17 +100,37 @@
       srcset () {
         return this.srcscetSizes.map(
           (width) => {
-            let finalWidth = this.getWidthAdaptedToWidthOnScreen(width)
+            let finalWidth = this.getWidthAdaptedToWidthOnScreen(width, this.widthOnScreen)
             return this.getImageUrlWithWidthAndHeight(finalWidth, this.getHeightFromWidth(finalWidth)) + ` ${finalWidth}w`
           }
         ).join(', ')
       },
+      tabletSrcset () {
+        return this.getSrcsetSizes('tablet').map(
+          (width) => {
+            let finalWidth = this.getWidthAdaptedToWidthOnScreen(width, this.widthOnScreenTablet)
+            return this.getImageUrlWithWidthAndHeight(finalWidth, this.getHeightFromWidth(finalWidth)) + ` ${finalWidth}w`
+          }
+        ).join(', ')
+      },
+      // only if there's a specific tablet width which is different from the desktop one
+      hasTabletSrcset () {
+        return typeof this.widthOnScreenTablet !== 'undefined' && this.widthOnScreenTablet !== this.widthOnScreen
+      },
       sizes () {
         return this.widthOnScreen + 'vw'
       },
+      tabletSizes () {
+        return this.widthOnScreenTablet + 'vw'
+      },
       srcscetSizes () {
         // check mode
-        switch(this.mode) {
+        return this.getSrcsetSizes(this.mode)
+      }
+    },
+    methods: {
+      getSrcsetSizes (mode) {
+        switch(mode) {
           case 'tablet': // portrait
             return this.baseSizes.tabletPortrait
             break;
@@ -123,15 +144,13 @@
           default:
             return [...new Set([...this.baseSizes.desktop ,...this.baseSizes.tabletPortrait, ...this.baseSizes.smartphone])]
         }
-      }
-    },
-    methods: {
+      },
       getHeightFromWidth (width) {
         return Math.round(width / this.imageRatio)
       },
-      getWidthAdaptedToWidthOnScreen (width) {
-        if(this.widthOnScreen === 100) return width
-        return Math.round(width / 100 * this.widthOnScreen)
+      getWidthAdaptedToWidthOnScreen (width, widthOnScreen) {
+        if(widthOnScreen === 100) return width
+        return Math.round(width / 100 * widthOnScreen)
       },
       getImageUrlWithWidthAndHeight (width, height) {
         return this.imageUrl.replace(this.widthPlaceholder, width).replace(this.heightPlaceholder, height)
