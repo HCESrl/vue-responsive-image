@@ -74,7 +74,7 @@ This plugin is based on the analyses I made for my clients, and explained in an 
 
 
 ### Assumptions
-This plugin assumes that you are using the same image, with the same  (the same width and height ratio), for all breakpoints. It might support different ratio images in the future.
+This plugin assumes that you are using the same image, with the same proportions (the same width and height ratio), for all breakpoints. It might support different ratio images in the future.
 
 It also assumes that you will use the same image width for desktop and tablet portrait, but that you might need a different overall image width for tablet portrait and smartphone. 
 
