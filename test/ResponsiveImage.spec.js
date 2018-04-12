@@ -3,6 +3,8 @@ import ResponsiveImage from '../src/ResponsiveImage.vue'
 
 const imageUrlRegex = /^http:\/\/via\.placeholder\.com\/[0-9]+x[0-9]+$/
 const srcsetRegex = /^(http:\/\/via\.placeholder\.com\/[0-9]+x[0-9]+ [0-9]+w(, )?)+$/
+const sizesRegex = /^[0-9]+vw$/
+
 
 describe('ResponsiveImage.vue', () => {
   it('check that there is an image and a source tag at least', () => {
@@ -46,7 +48,7 @@ describe('ResponsiveImage.vue', () => {
     })
     expect(wrapper.findAll('source')).toHaveLength(1)
   })
-  it('check that img tag has  a proper sizes attribute set', () => {
+  it('check that img tag has  a valid sizes attribute set', () => {
     const wrapper = mount(ResponsiveImage, {
       propsData: {
         imageUrl: 'http://via.placeholder.com/%width%x%height%',
@@ -55,9 +57,9 @@ describe('ResponsiveImage.vue', () => {
         widthOnScreenSmartphone: 100
       }
     })
-    expect(wrapper.find('img').attributes().sizes).toMatch(/^[0-9]+vw$/)
+    expect(wrapper.find('img').attributes().sizes).toMatch(sizesRegex)
   })
-  it('check that source tags have a proper sizes attribute set', () => {
+  it('check that source tags have a valid sizes attribute set', () => {
     const wrapper = mount(ResponsiveImage, {
       propsData: {
         imageUrl: 'http://via.placeholder.com/%width%x%height%',
@@ -66,8 +68,8 @@ describe('ResponsiveImage.vue', () => {
         widthOnScreenSmartphone: 100
       }
     })
-    expect(wrapper.findAll('source').at(0).attributes().sizes).toMatch(/^[0-9]+vw$/)
-    expect(wrapper.findAll('source').at(1).attributes().sizes).toMatch(/^[0-9]+vw$/)
+    expect(wrapper.findAll('source').at(0).attributes().sizes).toMatch(sizesRegex)
+    expect(wrapper.findAll('source').at(1).attributes().sizes).toMatch(sizesRegex)
   })
   it('check that img tag has a proper src attribute set', () => {
     const wrapper = mount(ResponsiveImage, {
@@ -90,5 +92,39 @@ describe('ResponsiveImage.vue', () => {
       }
     })
     expect(wrapper.find('img').attributes().srcset).toMatch(srcsetRegex)
+  })
+  it('check that source tags have a proper srcset attribute set', () => {
+    const wrapper = mount(ResponsiveImage, {
+      propsData: {
+        imageUrl: 'http://via.placeholder.com/%width%x%height%',
+        widthOnScreen: 50,
+        widthOnScreenTablet: 75,
+        widthOnScreenSmartphone: 100
+      }
+    })
+    expect(wrapper.findAll('source').at(0).attributes().srcset).toMatch(srcsetRegex)
+    expect(wrapper.findAll('source').at(1).attributes().srcset).toMatch(srcsetRegex)
+  })
+  it('check that image has the desired class/es', () => {
+    let myTestClass = 'myTestClass mySecondTestClass'
+    const wrapper = mount(ResponsiveImage, {
+      propsData: {
+        imageUrl: 'http://via.placeholder.com/%width%x%height%',
+        widthOnScreen: 50,
+        imageClass: myTestClass
+      }
+    })
+    expect(wrapper.find('img').attributes().class).toMatch(myTestClass)
+  })
+  it('check that image has the desired alt attribute', () => {
+    let myTestAlt = 'myTestAlt'
+    const wrapper = mount(ResponsiveImage, {
+      propsData: {
+        imageUrl: 'http://via.placeholder.com/%width%x%height%',
+        widthOnScreen: 50,
+        alt: myTestAlt
+      }
+    })
+    expect(wrapper.find('img').attributes().alt).toMatch(myTestAlt)
   })
 })
