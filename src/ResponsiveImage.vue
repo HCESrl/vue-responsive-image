@@ -9,38 +9,6 @@
 <script>
 export default {
   name: 'VueResponsiveImage',
-  data: () => {
-    return {
-      'defaultClass': 'vue-responsive-image',
-      // width placeholder
-      'widthPlaceholder': '%width%',
-      // height placeholder
-      'heightPlaceholder': '%height%',
-      // the base sizes on which to calculate final image width
-      'baseSizes': {
-        'desktop': [
-          1920,
-          1600,
-          1440,
-          1366,
-          1024,
-          768
-        ],
-        'tabletPortrait': [
-          1600,
-          1024,
-          768
-        ],
-        'smartphone': [
-          818,
-          768,
-          640
-        ]
-      },
-      // the default width of the image
-      defaultWidth: 1600
-    }
-  },
   props: {
     // the base with which to generate image urls, with placeholders for width and height
     // %width% and %height%
@@ -92,22 +60,65 @@ export default {
       default: 1920
     }
   },
+  data: () => {
+    return {
+      'defaultClass': 'vue-responsive-image',
+      // width placeholder
+      'widthPlaceholder': '%width%',
+      // height placeholder
+      'heightPlaceholder': '%height%',
+      // the base sizes on which to calculate final image width
+      'baseSizes': {
+        'desktop': [
+          1920,
+          1600,
+          1440,
+          1366,
+          1024,
+          768
+        ],
+        'tabletPortrait': [
+          1600,
+          1024,
+          768
+        ],
+        'smartphone': [
+          818,
+          768,
+          640
+        ]
+      },
+      // the default width of the image, a reasonable size for old browsers, mostly desktop, who don't support srcset
+      defaultWidth: 1600
+    }
+  },
   computed: {
     test () {
       return 'test'
     },
     // the default image in the src attribute, for backwards compatibility
     defaultImage () {
-      let finalWidth = this.getWidthAdaptedToWidthOnScreen(this.defaultWidth)
+      let finalWidth = this.getWidthAdaptedToWidthOnScreen(this.defaultWidth, this.widthOnScreen)
       return this.getImageUrlWithWidthAndHeight(finalWidth, this.getHeightFromWidth(finalWidth))
     },
     srcset () {
-      return this.srcscetSizes.map(
-        (width) => {
-          let finalWidth = this.getWidthAdaptedToWidthOnScreen(width, this.widthOnScreen)
-          return this.getImageUrlWithWidthAndHeight(finalWidth, this.getHeightFromWidth(finalWidth)) + ` ${finalWidth}w`
-        }
-      ).join(', ')
+      // if no different widths are defined for tablet and desktop, produce images for all versions requested in mode parameter
+      if (typeof this.widthOnScreenTablet === 'undefined' && typeof this.widthOnScreenSmartphone === 'undefined') {
+        return this.srcscetSizes.map(
+          (width) => {
+            let finalWidth = this.getWidthAdaptedToWidthOnScreen(width, this.widthOnScreen)
+            return this.getImageUrlWithWidthAndHeight(finalWidth, this.getHeightFromWidth(finalWidth)) + ` ${finalWidth}w`
+          }
+        ).join(', ')
+      } else {
+        // produce images only for desktop
+        return this.getSrcsetSizes('desktop').map(
+          (width) => {
+            let finalWidth = this.getWidthAdaptedToWidthOnScreen(width, this.widthOnScreenTablet)
+            return this.getImageUrlWithWidthAndHeight(finalWidth, this.getHeightFromWidth(finalWidth)) + ` ${finalWidth}w`
+          }
+        ).join(', ')
+      }
     },
     tabletSrcset () {
       return this.getSrcsetSizes('tablet').map(
@@ -159,6 +170,9 @@ export default {
         case 'mobile':
           return [...new Set([...this.baseSizes.tabletPortrait, ...this.baseSizes.smartphone])]
           break;
+        case 'desktop':
+          return this.baseSizes.desktop
+          break;
         case 'all':
         default:
           return [...new Set([...this.baseSizes.desktop ,...this.baseSizes.tabletPortrait, ...this.baseSizes.smartphone])]
@@ -168,7 +182,7 @@ export default {
       return Math.round(width / this.imageRatio)
     },
     getWidthAdaptedToWidthOnScreen (width, widthOnScreen = 100) {
-      if(widthOnScreen === 100) return width
+      if(widthOnScreen >= 100) return 100
       return Math.round(width / 100 * widthOnScreen)
     },
     getImageUrlWithWidthAndHeight (width, height) {
