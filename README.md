@@ -95,7 +95,7 @@ There is a unit test suite made with mocha-webpack, just clone the project, inst
 
 - More sophisticated options for different breakpoints and different ratios
 - Automatic lazy loading using the Intersection Observer API
-- Integration with some routine to produce the images with server-side routines 
+- Integration with some routine to produce the images with server-side tools 
 according to the plugin's logic
 - A more thorough unit test suite
 - Switch to a single 'config' parameter? Not sure if it's needed
