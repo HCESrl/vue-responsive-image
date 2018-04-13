@@ -3,6 +3,9 @@ import ResponsiveImage from '../src/ResponsiveImage.vue'
 
 const imageUrlRegex = /^http:\/\/via\.placeholder\.com\/[0-9]+x[0-9]+$/
 const srcsetRegex = /^(http:\/\/via\.placeholder\.com\/[0-9]+x[0-9]+ [0-9]+w(, )?)+$/
+function regexForSrcsetNTimes (num) {
+  return new RegExp('^(http:\/\/via\.placeholder\.com\/[0-9]+x[0-9]+ [0-9]+w(, )?){' + num + '}$')
+}
 const sizesRegex = /^[0-9]+vw$/
 
 
@@ -126,5 +129,59 @@ describe('ResponsiveImage.vue', () => {
       }
     })
     expect(wrapper.find('img').attributes().alt).toMatch(myTestAlt)
+  })
+  it('check that image has the expected number of srcsets (8) on "all" mode with no other image sizes', () => {
+    let myTestAlt = 'myTestAlt'
+    const wrapper = mount(ResponsiveImage, {
+      propsData: {
+        imageUrl: 'http://via.placeholder.com/%width%x%height%',
+        widthOnScreen: 50,
+        alt: myTestAlt
+      }
+    })
+    let regExp = regexForSrcsetNTimes(8)
+    expect(wrapper.find('img').attributes().srcset).toMatch(regExp)
+  })
+  it('check that image has the expected number of srcsets (6) on "all" mode with tablet and smartphone images widths set', () => {
+    let myTestAlt = 'myTestAlt'
+    const wrapper = mount(ResponsiveImage, {
+      propsData: {
+        imageUrl: 'http://via.placeholder.com/%width%x%height%',
+        widthOnScreen: 50,
+        widthOnScreenTablet: 75,
+        widthOnScreenSmartphone: 100,
+        alt: myTestAlt
+      }
+    })
+    let regExp = regexForSrcsetNTimes(6)
+    expect(wrapper.find('img').attributes().srcset).toMatch(regExp)
+  })
+  it('check that smartphone src produces the expected number of srcsets (3) on "all" mode with tablet and smartphone images widths set', () => {
+    let myTestAlt = 'myTestAlt'
+    const wrapper = mount(ResponsiveImage, {
+      propsData: {
+        imageUrl: 'http://via.placeholder.com/%width%x%height%',
+        widthOnScreen: 50,
+        widthOnScreenTablet: 75,
+        widthOnScreenSmartphone: 100,
+        alt: myTestAlt
+      }
+    })
+    let regExp = regexForSrcsetNTimes(3)
+    expect(wrapper.findAll('source').at(0).attributes().srcset).toMatch(regExp)
+  })
+  it('check that tablet src produces the expected number of srcsets (3) on "all" mode with tablet and smartphone images widths set', () => {
+    let myTestAlt = 'myTestAlt'
+    const wrapper = mount(ResponsiveImage, {
+      propsData: {
+        imageUrl: 'http://via.placeholder.com/%width%x%height%',
+        widthOnScreen: 50,
+        widthOnScreenTablet: 75,
+        widthOnScreenSmartphone: 100,
+        alt: myTestAlt
+      }
+    })
+    let regExp = regexForSrcsetNTimes(3)
+    expect(wrapper.findAll('source').at(1).attributes().srcset).toMatch(regExp)
   })
 })
