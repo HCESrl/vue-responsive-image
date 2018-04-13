@@ -132,7 +132,8 @@ export default {
       return this.getSrcsetSizes('smartphone').map(
         (width) => {
           let finalWidth = this.getWidthAdaptedToWidthOnScreen(width, this.widthOnScreenSmartphone)
-          return this.getImageUrlWithWidthAndHeight(finalWidth, this.getHeightFromWidth(finalWidth)) + ` ${finalWidth}w`
+          let result = this.getImageUrlWithWidthAndHeight(finalWidth, this.getHeightFromWidth(finalWidth)) + ` ${finalWidth}w`
+          return result
         }
       ).join(', ')
     },
@@ -175,14 +176,14 @@ export default {
           break;
         case 'all':
         default:
-          return [...new Set([...this.baseSizes.desktop ,...this.baseSizes.tabletPortrait, ...this.baseSizes.smartphone])]
+          return [...new Set([...this.baseSizes.desktop, ...this.baseSizes.tabletPortrait, ...this.baseSizes.smartphone])]
       }
     },
     getHeightFromWidth (width) {
       return Math.round(width / this.imageRatio)
     },
     getWidthAdaptedToWidthOnScreen (width, widthOnScreen = 100) {
-      if(widthOnScreen >= 100) return 100
+      if (widthOnScreen >= 100) return width
       return Math.round(width / 100 * widthOnScreen)
     },
     getImageUrlWithWidthAndHeight (width, height) {
