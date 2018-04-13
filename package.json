@@ -1,8 +1,8 @@
 {
   "name": "vue-responsive-image",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A Vue component to manage responsive images",
-  "main": "index.js",
+  "main": "src/ResponsiveImage.vue",
   "scripts": {
     "test": "mocha-webpack --webpack-config webpack.config.js --require test/setup.js test/ResponsiveImage.spec.js",
     "dev": "webpack-dev-server --mode development --open",
