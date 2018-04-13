@@ -12,7 +12,7 @@ You need to have some system that automatically generates the images for you
 when an URL with the appropriate format is called, for example:
 http://via.placeholder.com/1920x1080
  
-## Installation
+## Standard Installation
 
 ### npm
 
@@ -23,6 +23,12 @@ http://via.placeholder.com/1920x1080
 Import the component in the .vue template that uses it
 
 ``` import VueResponsiveImage from 'vue-responsive-image' ```
+
+## Fast installation
+
+Just copy the ResponsiveImage.vue component somewhere in your project and import it in the templates that need it. 
+Remember that this way your component won't be automatically upgraded with 
+bugfixes and improvements, though! 
 
 ## Usage
    
