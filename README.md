@@ -30,6 +30,12 @@ Just copy the ResponsiveImage.vue component somewhere in your project and import
 Remember that this way your component won't be automatically upgraded with 
 bugfixes and improvements, though! 
 
+## Using a .js file
+
+You can also include the script you find in the dist/ folder called vue-responsive-image-web.min.js. This
+way you can use it directly in simple Vue-based pages. To find out how to include it, check the HTML file in web-test/web-test.html.
+Keep in mind that in this case your component won't be automatically upgraded unless you manually update the script.
+
 ## Usage
    
 VueResponsiveImage must be used as a component in your template.
