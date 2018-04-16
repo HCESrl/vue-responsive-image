@@ -84,7 +84,7 @@ This plugin assumes that you are using the same image, with the same proportions
 
 It also assumes that you will use the same image width for desktop and tablet portrait, but that you might need a different overall image width for tablet portrait and smartphone. 
 
-For example, your image might occupy 33% of the screen on desktop, 50% on tablet and 100% on mobile. This requires completely different
+For example, your image might occupy 33% of the screen on desktop, 50% on tablet portrait and 100% on smartphones. This requires completely different
 sizes for the final images in the HTML, and the plugin calculates those for you.
 This is by far the most common use case according to my experience.
 
