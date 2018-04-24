@@ -102,10 +102,6 @@ This is by far the most common use case according to my experience.
 ## Testing
 There is a unit test suite made with mocha-webpack, just clone the project, install with npm and run `npm run test`.
 
-## Contributing
-If you would like to contribute or suggest changes, please get in touch through the issues page on Github
-
-
 ## Roadmap
 
 - More sophisticated options for different breakpoints and different ratios
