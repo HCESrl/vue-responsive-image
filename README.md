@@ -79,6 +79,11 @@ It currently supports the following parameters:
   <tr><td>mode</td><td>'all'</td><td>Possible values: 'all', 'tablet', 'smartphone', 'mobile'. The desidered mode of operation for the main image, if only "mobile" is passed, then desktop sizes will not be generated, etc.</td></tr>
 </table>
 
+
+## Demo
+You can find a simple demo here: https://codepen.io/paolomioni/pen/PeNoQg
+
+
 ## Principles
 This plugin is based on the analyses I made for my clients, and explained in an article I wrote which you can find here:
 
@@ -96,9 +101,6 @@ This is by far the most common use case according to my experience.
 
 ## Testing
 There is a unit test suite made with mocha-webpack, just clone the project, install with npm and run `npm run test`.
-
-## Demo
-You can find a simple demo here: https://codepen.io/paolomioni/pen/PeNoQg
 
 ## Contributing
 If you would like to contribute or suggest changes, please get in touch through the issues page on Github
