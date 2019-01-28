@@ -4,7 +4,7 @@ Vue Responsive Image is a Vue component that allows you to quickly
 insert responsive image tags in your Vue project, provided you have some automated 
 system that produces the various sizes of images required. The component calculates 
 all source sizes and, depending on the parameters passed, generates the appropriate
-\<img\> tag and its srcset attribute and, if needed, separate \<source\> tags
+`<img>` tag and its `srcset` attribute and, if needed, separate `<source>` tags
  for tablet portrait and smartphone views.
  
 ## Requirements
@@ -20,20 +20,20 @@ http://via.placeholder.com/1920x1080
 
 ### Vue
 
-Import the component in the .vue template that uses it
+Import the component in the `*.vue` template that uses it
 
 ``` import VueResponsiveImage from 'vue-responsive-image' ```
 
 ## Fast installation
 
-Just copy the ResponsiveImage.vue component somewhere in your project and import it in the templates that need it. 
+Just copy the `ResponsiveImage.vue` component somewhere in your project and import it in the templates that need it. 
 Remember that this way your component won't be automatically upgraded with 
 bugfixes and improvements, though! 
 
 ## Using a .js file
 
-You can also include the script you find in the dist/ folder called vue-responsive-image-web.min.js. This
-way you can use it directly in simple Vue-based pages. To find out how to include it, check the HTML file in web-test/web-test.html.
+You can also include the script you find in the `dist/` folder called `vue-responsive-image-web.min.js`. This
+way you can use it directly in simple Vue-based pages. To find out how to include it, check the HTML file in `web-test/web-test.html`.
 Keep in mind that in this case your component won't be automatically upgraded unless you manually update the script.
 
 ## Usage
@@ -48,6 +48,7 @@ Minimal usage:
     :image-ratio="16/9"
   ></vue-responsive-image>
 ```
+
 Complete set of options:
 
 ```
@@ -68,15 +69,37 @@ Complete set of options:
 It currently supports the following parameters:
 
 <table>
-  <tr><td><b>Parameter</b></td><td><b>Default value</b></td><td></td></tr>
-  <tr><td>image-url</td><td>N/a</td><td>The base url to create images, with a width and height placeholder which will be replaced by the component. Example:http://via.placeholder.com/%width%x%height%. %width% and %height% will be replaced with the calculated width and height for each image.</td></tr>
-  <tr><td>width-on-screen</td><td>100</td><td>The percentage of the screen the image will occupy in the layout. Used to determine the various sizes for the srcset of the image</td></tr>
-  <tr><td>width-on-screen-tablet</td><td>-</td><td>The percentage of the screen the image will occupy in the layout on tablet-portrait mode, only if different from default</td></tr>
-  <tr><td>width-on-screen-smartphone</td><td>-</td><td>The percentage of the screen the image will occupy in the layout on smartphone mode, only if different from default</td></tr>
-  <tr><td>image-ratio</td><td>16/9</td><td>The width to height ratio of the image, used to determine the height of the final images</td></tr>
-  <tr><td>alt</td><td>''</td><td>The alt attribute for the image</td></tr>
-  <tr><td>class</td><td>''</td><td>The extra class(es) to be added to the image. The class "vue-reponsive-image" is added by default</td></tr>
-  <tr><td>mode</td><td>'all'</td><td>Possible values: 'all', 'tablet', 'smartphone', 'mobile'. The desidered mode of operation for the main image, if only "mobile" is passed, then desktop sizes will not be generated, etc.</td></tr>
+ <colgroup span="1">
+  <col style="text-align:center" />
+  
+ </colgroup>
+ <thead>
+  <tr><th><b>Parameter</b></th>
+   <th><b>Default value</b></th>
+   <td></td>
+  </tr>
+ </thead>
+ 
+ <tbody>
+ <tr>
+  <td><code>image-url</code></td>
+  <td>n/a</td>
+  <td>The base URL to create images, with a width and height placeholder which will be replaced by the component.
+  <br />
+  Example:http://via.placeholder.com/%width%x%height%.
+   <br />
+   <code>%width%</code> and <code>%height%</code> will be replaced with the calculated width and height for each image.</td>
+ </tr>
+  <tr>
+   <td><code>width-on-screen</code></td>
+   <td><code>100</code></td><td>The percentage of the screen the image will occupy in the layout. Used to determine the various sizes for the <code>srcset</code> of the image</td></tr>
+  <tr><td><code>width-on-screen-tablet</code></td><td>-</td><td>The percentage of the screen the image will occupy in the layout on <code>tablet-portrait</code> mode, only if different from default.</td></tr>
+  <tr><td><code>width-on-screen-smartphone</code></td><td>-</td><td>The percentage of the screen the image will occupy in the layout on <code>smartphone</code> mode, only if different from default.</td></tr>
+  <tr><td><code>image-ratio</code></td><td><code>16/9</code></td><td>The width-to-height ratio of the image. Used to determine the height of the final images.</td></tr>
+  <tr><td><code>alt</code></td><td><code>''</code></td><td>The <code>alt</code> attribute for the image.</td></tr>
+  <tr><td><code>class</code></td><td><code>''</code></td><td>The extra class(es) to be added to the image. The class <code>"vue-reponsive-image"</code> is added by default.</td></tr>
+  <tr><td><code>mode</td><td><code>'all'</code></td><td>Possible values: <code>'all'</code>, <code>'tablet'</code>, <code>'smartphone'</code>, <code>'mobile'</code>. The desidered mode of operation for the main image. If only <code>"mobile"</code> is passed, then desktop sizes will not be generated, etc.</td></tr>
+ </tbody>
 </table>
 
 
@@ -87,7 +110,7 @@ You can find a simple demo here: https://codepen.io/paolomioni/pen/PeNoQg
 ## Principles
 This plugin is based on the analyses I made for my clients, and explained in an article I wrote which you can find here:
 
-[Applying srcset: choosing the right sizes for responsive images at different breakpoints](https://medium.com/hceverything/applying-srcset-choosing-the-right-sizes-for-responsive-images-at-different-breakpoints-a0433450a4a3)
+[Applying `srcset`: choosing the right sizes for responsive images at different breakpoints](https://medium.com/hceverything/applying-srcset-choosing-the-right-sizes-for-responsive-images-at-different-breakpoints-a0433450a4a3)
 
 
 ### Assumptions
@@ -95,12 +118,12 @@ This plugin assumes that you are using the same image, with the same proportions
 
 It also assumes that you will use the same image width for desktop and tablet portrait, but that you might need a different overall image width for tablet portrait and smartphone. 
 
-For example, your image might occupy 33% of the screen on desktop, 50% on tablet portrait and 100% on smartphones. This requires completely different
+For example, your image might occupy 33% of the screen on desktop, 50% on tablet portrait, and 100% on smartphones. This requires completely different
 sizes for the final images in the HTML, and the plugin calculates those for you.
 This is by far the most common use case according to my experience.
 
 ## Testing
-There is a unit test suite made with mocha-webpack, just clone the project, install with npm and run `npm run test`.
+There is a unit test suite made with mocha-webpack. Just clone the project, install with npm, and run `npm run test`.
 
 ## Roadmap
 
@@ -109,10 +132,10 @@ There is a unit test suite made with mocha-webpack, just clone the project, inst
 - Integration with some routine to produce the images with server-side tools 
 according to the plugin's logic
 - A more thorough unit test suite
-- Switch to a single 'config' parameter? Not sure if it's needed
+- Switch to a single `config` parameter? Not sure if it's needed
 
-Feel free to contact me with proposal, requests and pull requests.
-Bugs and issues should be submitted on the Github page of the project. 
+Feel free to contact me with proposal, requests, and pull requests.
+Bugs and issues should be submitted on the GitHub page of the project. 
 
 ## License
 MIT
