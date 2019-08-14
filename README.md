@@ -75,7 +75,7 @@ It currently supports the following parameters:
   <tr><td>image-url</td><td>N/a</td><td>The base url to create images, with a width and height placeholder which will be replaced by the component. Example:http://via.placeholder.com/%width%x%height%. %width% and %height% will be replaced with the calculated width and height for each image.</td></tr>
   <tr><td>show-error-image</td><td>false</td><td>Whether to show the error image instead of the broken image if the current image fails to load</td></tr>
   <tr><td>error-image-url</td><td>N/a</td><td>The URL for an image to show in case of failure to load the image. It can be an inline SVG. The component now detects image load failures and instead of showing broken images shows an error image. The default is a grey-background svg</td></tr>
-  <tr><td>width-on-screen</td><td>100</td><td>The percentage of the screen the image will occupy in the layout. Used to determine the various sizes for the srcset of the image</td></tr>
+  <tr><td>width-on-screen</td><td>100</td><td>The percentage of the screen the image will occupy in the layout. Used to determine the various s0izes for the srcset of the image</td></tr>
   <tr><td>width-on-screen-tablet</td><td>-</td><td>The percentage of the screen the image will occupy in the layout on tablet-portrait mode, only if different from default</td></tr>
   <tr><td>width-on-screen-smartphone</td><td>-</td><td>The percentage of the screen the image will occupy in the layout on smartphone mode, only if different from default</td></tr>
   <tr><td>image-ratio</td><td>16/9</td><td>The width to height ratio of the image, used to determine the height of the final images</td></tr>
