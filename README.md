@@ -53,6 +53,8 @@ Complete set of options:
 ```
 <vue-responsive-image
     :image-url="'http://via.placeholder.com/%width%x%height%'"
+    :error-image-url="'https://via.placeholder.com/160x90.png/09f/fff?text=Not+Found'"
+    :show-error-image="true"
     :width-on-screen="50"
     :width-on-screen-tablet="75"
     :width-on-screen-smartphone="100"
@@ -70,6 +72,8 @@ It currently supports the following parameters:
 <table>
   <tr><td><b>Parameter</b></td><td><b>Default value</b></td><td></td></tr>
   <tr><td>image-url</td><td>N/a</td><td>The base url to create images, with a width and height placeholder which will be replaced by the component. Example:http://via.placeholder.com/%width%x%height%. %width% and %height% will be replaced with the calculated width and height for each image.</td></tr>
+  <tr><td>show-error-image</td><td>false</td><td>Whether to show the error image instead of the broken image if the current image fails to load</td></tr>
+  <tr><td>error-image-url</td><td>N/a</td><td>The URL for an image to show in case of failure to load the image. It can be an inline SVG. The component now detects image load failures and instead of showing broken images shows an error image. The default is a grey-background svg</td></tr>
   <tr><td>width-on-screen</td><td>100</td><td>The percentage of the screen the image will occupy in the layout. Used to determine the various sizes for the srcset of the image</td></tr>
   <tr><td>width-on-screen-tablet</td><td>-</td><td>The percentage of the screen the image will occupy in the layout on tablet-portrait mode, only if different from default</td></tr>
   <tr><td>width-on-screen-smartphone</td><td>-</td><td>The percentage of the screen the image will occupy in the layout on smartphone mode, only if different from default</td></tr>
@@ -93,7 +97,7 @@ This plugin is based on the analyses I made for my clients, and explained in an 
 ### Assumptions
 This plugin assumes that you are using the same image, with the same proportions (the same width and height ratio), for all breakpoints. It might support different ratio images in the future.
 
-It also assumes that you will use the same image width for desktop and tablet portrait, but that you might need a different overall image width for tablet portrait and smartphone. 
+It also assumes that you will use the same image width for desktop and tablet landscape, but that you might need a different overall image width for tablet portrait and smartphone. 
 
 For example, your image might occupy 33% of the screen on desktop, 50% on tablet portrait and 100% on smartphones. This requires completely different
 sizes for the final images in the HTML, and the plugin calculates those for you.
