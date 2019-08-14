@@ -4,7 +4,7 @@ Vue Responsive Image is a Vue component that allows you to quickly
 insert responsive image tags in your Vue project, provided you have some automated 
 system that produces the various sizes of images required. The component calculates 
 all source sizes and, depending on the parameters passed, generates the appropriate
-\<img\> tag and its srcset attribute and, if needed, separate \<source\> tags
+`<img>` tag and its `srcset` attribute and, if needed, separate `<source>` tags
  for tablet portrait and smartphone views.
  
 ## Requirements
@@ -20,20 +20,20 @@ http://via.placeholder.com/1920x1080
 
 ### Vue
 
-Import the component in the .vue template that uses it
+Import the component in the `*.vue` template that uses it
 
 ``` import VueResponsiveImage from 'vue-responsive-image' ```
 
 ## Fast installation
 
-Just copy the ResponsiveImage.vue component somewhere in your project and import it in the templates that need it. 
+Just copy the `ResponsiveImage.vue` component somewhere in your project and import it in the templates that need it. 
 Remember that this way your component won't be automatically upgraded with 
 bugfixes and improvements, though! 
 
 ## Using a .js file
 
-You can also include the script you find in the dist/ folder called vue-responsive-image-web.min.js. This
-way you can use it directly in simple Vue-based pages. To find out how to include it, check the HTML file in web-test/web-test.html.
+You can also include the script you find in the `dist/` folder called `vue-responsive-image-web.min.js`. This
+way you can use it directly in simple Vue-based pages. To find out how to include it, check the HTML file in `web-test/web-test.html`.
 Keep in mind that in this case your component won't be automatically upgraded unless you manually update the script.
 
 ## Usage
@@ -48,6 +48,7 @@ Minimal usage:
     :image-ratio="16/9"
   ></vue-responsive-image>
 ```
+
 Complete set of options:
 
 ```
@@ -91,7 +92,7 @@ You can find a simple demo here: https://codepen.io/paolomioni/pen/PeNoQg
 ## Principles
 This plugin is based on the analyses I made for my clients, and explained in an article I wrote which you can find here:
 
-[Applying srcset: choosing the right sizes for responsive images at different breakpoints](https://medium.com/hceverything/applying-srcset-choosing-the-right-sizes-for-responsive-images-at-different-breakpoints-a0433450a4a3)
+[Applying `srcset`: choosing the right sizes for responsive images at different breakpoints](https://medium.com/hceverything/applying-srcset-choosing-the-right-sizes-for-responsive-images-at-different-breakpoints-a0433450a4a3)
 
 
 ### Assumptions
@@ -99,12 +100,12 @@ This plugin assumes that you are using the same image, with the same proportions
 
 It also assumes that you will use the same image width for desktop and tablet landscape, but that you might need a different overall image width for tablet portrait and smartphone. 
 
-For example, your image might occupy 33% of the screen on desktop, 50% on tablet portrait and 100% on smartphones. This requires completely different
+For example, your image might occupy 33% of the screen on desktop, 50% on tablet portrait, and 100% on smartphones. This requires completely different
 sizes for the final images in the HTML, and the plugin calculates those for you.
 This is by far the most common use case according to my experience.
 
 ## Testing
-There is a unit test suite made with mocha-webpack, just clone the project, install with npm and run `npm run test`.
+There is a unit test suite made with mocha-webpack. Just clone the project, install with npm, and run `npm run test`.
 
 ## Roadmap
 
@@ -113,10 +114,10 @@ There is a unit test suite made with mocha-webpack, just clone the project, inst
 - Integration with some routine to produce the images with server-side tools 
 according to the plugin's logic
 - A more thorough unit test suite
-- Switch to a single 'config' parameter? Not sure if it's needed
+- Switch to a single `config` parameter? Not sure if it's needed
 
-Feel free to contact me with proposal, requests and pull requests.
-Bugs and issues should be submitted on the Github page of the project. 
+Feel free to contact me with proposal, requests, and pull requests.
+Bugs and issues should be submitted on the GitHub page of the project. 
 
 ## License
 MIT
