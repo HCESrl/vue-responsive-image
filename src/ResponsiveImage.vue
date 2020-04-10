@@ -8,6 +8,8 @@
 </template>
 
 <script>
+const responsiveImageSizes = require('responsive-image-sizes')
+
 export default {
   name: 'VueResponsiveImage',
   props: {
@@ -128,34 +130,30 @@ export default {
     srcset () {
       // if no different widths are defined for tablet and desktop, produce images for all versions requested in mode parameter
       if (typeof this.widthOnScreenTablet === 'undefined' && typeof this.widthOnScreenSmartphone === 'undefined') {
-        return this.srcscetSizes.map(
-          (width) => {
-            let finalWidth = this.getWidthAdaptedToWidthOnScreen(width, this.widthOnScreen)
+        return this.getSrcsetSizes('all', this.widthOnScreen).map(
+          (finalWidth) => {
             return this.getImageUrlWithWidthAndHeight(finalWidth, this.getHeightFromWidth(finalWidth)) + ` ${finalWidth}w`
           }
         ).join(', ')
       } else {
         // produce images only for desktop
-        return this.getSrcsetSizes('desktop').map(
-          (width) => {
-            let finalWidth = this.getWidthAdaptedToWidthOnScreen(width, this.widthOnScreenTablet)
+        return this.getSrcsetSizes('desktop', this.widthOnScreen).map(
+          (finalWidth) => {
             return this.getImageUrlWithWidthAndHeight(finalWidth, this.getHeightFromWidth(finalWidth)) + ` ${finalWidth}w`
           }
         ).join(', ')
       }
     },
     tabletSrcset () {
-      return this.getSrcsetSizes('tablet').map(
-        (width) => {
-          let finalWidth = this.getWidthAdaptedToWidthOnScreen(width, this.widthOnScreenTablet)
+      return this.getSrcsetSizes('tablet', this.widthOnScreenTablet).map(
+        (finalWidth) => {
           return this.getImageUrlWithWidthAndHeight(finalWidth, this.getHeightFromWidth(finalWidth)) + ` ${finalWidth}w`
         }
       ).join(', ')
     },
     smartphoneSrcset () {
-      return this.getSrcsetSizes('smartphone').map(
-        (width) => {
-          let finalWidth = this.getWidthAdaptedToWidthOnScreen(width, this.widthOnScreenSmartphone)
+      return this.getSrcsetSizes('smartphone', this.widthOnScreenSmartphone).map(
+        (finalWidth) => {
           let result = this.getImageUrlWithWidthAndHeight(finalWidth, this.getHeightFromWidth(finalWidth)) + ` ${finalWidth}w`
           return result
         }
@@ -197,7 +195,17 @@ export default {
       this.hasError = true
       console.log('could not load image due to error ', error)
     },
-    getSrcsetSizes (mode) {
+    getSrcsetSizes (mode, widthOnPage) {
+      let mappedMode = mode
+      if (mode === 'tablet') {
+        mappedMode = 'tabletPortrait'
+      }
+      let options = {
+        deviceType: mappedMode,
+        widthOnPage: widthOnPage
+      }
+      return responsiveImageSizes.getResponsiveSizes(options)
+      /*
       switch (mode) {
         case 'tablet': // portrait
           return this.baseSizes.tabletPortrait
@@ -215,6 +223,7 @@ export default {
         default:
           return [...new Set([...this.baseSizes.desktop, ...this.baseSizes.tabletPortrait, ...this.baseSizes.smartphone])]
       }
+      */
     },
     getHeightFromWidth (width) {
       return Math.round(width / this.imageRatio)
