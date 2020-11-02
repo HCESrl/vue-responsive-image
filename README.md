@@ -119,5 +119,9 @@ according to the plugin's logic
 Feel free to contact me with proposal, requests, and pull requests.
 Bugs and issues should be submitted on the GitHub page of the project. 
 
+## Credits 
+Created by Paolo Mioni for HCE Web Agency.
+https://www.hce.it/
+
 ## License
 MIT

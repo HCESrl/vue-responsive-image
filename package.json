@@ -1,6 +1,6 @@
 {
   "name": "vue-responsive-image",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Vue component to manage responsive images",
   "main": "src/ResponsiveImage.vue",
   "scripts": {
@@ -19,7 +19,11 @@
     "frontend",
     "responsive"
   ],
-  "author": "Paolo Mioni",
+  "author": {
+    "name": "Paolo Mioni",
+    "email": "pmioni@hce.it",
+    "url": "https://www.hce.it"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/HCESrl/vue-responsive-image/issues"
