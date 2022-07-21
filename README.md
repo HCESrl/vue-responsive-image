@@ -11,6 +11,8 @@ all source sizes and, depending on the parameters passed, generates the appropri
 You need to have some system that automatically generates the images for you
 when an URL with the appropriate format is called, for example:
 http://via.placeholder.com/1920x1080
+
+Version 1.0 works with **Vue 2**. 
  
 ## Standard Installation
 
