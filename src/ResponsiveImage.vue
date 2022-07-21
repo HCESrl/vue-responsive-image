@@ -1,9 +1,30 @@
 <template>
   <picture>
-    <source v-if="hasSmartphoneSrcset && !showError" :srcset="smartphoneSrcset" :sizes="smartphoneSizes" media="(max-width: 767px)">
-    <source v-if="hasTabletSrcset && !showError" :srcset="tabletSrcset" :sizes="tabletSizes" media="(min-width: 768px) and (max-width: 1023px)">
-    <img v-if="!showError" :src="defaultImage" :alt="alt" :class="[defaultClass, imageClass]" :srcset="srcset" :sizes="sizes" @error="onError">
-    <img v-else :src="errorImage" :alt="alt" :class="[defaultClass, imageClass, errorClass]">
+    <source
+      v-if="hasSmartphoneSrcset && !showError"
+      :srcset="smartphoneSrcset"
+      :sizes="smartphoneSizes"
+      media="(max-width: 767px)">
+    <source
+      v-if="hasTabletSrcset && !showError"
+      :srcset="tabletSrcset"
+      :sizes="tabletSizes"
+      media="(min-width: 768px) and (max-width: 1023px)">
+    <img
+      v-if="!showError"
+      :src="defaultImage"
+      :alt="alt"
+      :class="[defaultClass, imageClass]"
+      :srcset="srcset"
+      :sizes="sizes"
+      :loading="loadingMode"
+      @error="onError">
+    <img
+      v-else
+      :src="errorImage"
+      :alt="alt"
+      :class="[defaultClass, imageClass, errorClass]"
+      :loading="loadingMode">
   </picture>
 </template>
 
@@ -71,6 +92,11 @@ export default {
     maxWidth: {
       type: Number,
       default: 1920
+    },
+    // whether to trigger lazy loading or not
+    lazyLoading: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => {
@@ -110,6 +136,9 @@ export default {
     }
   },
   computed: {
+    loadingMode () {
+      return this.lazyLoading ? 'lazy' : null
+    },
     test () {
       return 'test'
     },

@@ -130,4 +130,15 @@ describe('ResponsiveImage.vue', () => {
     })
     expect(wrapper.find('img').attributes().alt).toMatch(myTestAlt)
   })
+  it('check that image has a lazy loading attribute if set', () => {
+    let testValue = 'lazy'
+    const wrapper = mount(ResponsiveImage, {
+      propsData: {
+        imageUrl: 'http://via.placeholder.com/%width%x%height%',
+        widthOnScreen: 50,
+        lazyLoading: true
+      }
+    })
+    expect(wrapper.find('img').attributes().loading).toMatch(testValue)
+  })
 })
