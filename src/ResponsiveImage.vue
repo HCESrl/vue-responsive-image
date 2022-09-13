@@ -213,7 +213,7 @@ export default {
   watch: {
     imageUrl: {
       immediate: true,
-      handler (value, oldValue) {
+      handler (value, oldValue) { // eslint-disable-line
         this.hasError = false
         // console.log('image changed', value, oldValue)
       }

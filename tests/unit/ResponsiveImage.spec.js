@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import ResponsiveImage from '../src/ResponsiveImage.vue'
+import ResponsiveImage from '../../src/ResponsiveImage.vue'
 
 const imageUrlRegex = /^http:\/\/via\.placeholder\.com\/[0-9]+x[0-9]+$/
 const srcsetRegex = /^(http:\/\/via\.placeholder\.com\/[0-9]+x[0-9]+ [0-9]+w(, )?)+$/
@@ -19,8 +19,8 @@ describe('ResponsiveImage.vue', () => {
         widthOnScreenSmartphone: 100
       }
     })
-    expect(wrapper.contains('img')).toBe(true)
-    expect(wrapper.contains('source')).toBe(true)
+    expect(wrapper.find('img')).toBeTruthy();
+    expect(wrapper.find('source')).toBeTruthy();
   })
   it('check that there is no source tag if there\'s only the desktop width set', () => {
     const wrapper = mount(ResponsiveImage, {
@@ -29,7 +29,7 @@ describe('ResponsiveImage.vue', () => {
         widthOnScreen: 50
       }
     })
-    expect(wrapper.contains('source')).toBe(false)
+    expect(wrapper.findAll('source')).toHaveLength(0);
   })
   it('check that there is one source tag if there\'s only the tablet width set', () => {
     const wrapper = mount(ResponsiveImage, {

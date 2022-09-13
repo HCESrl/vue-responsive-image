@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Responsive image plugin</title>
+  <style type="text/css">
+    body {
+      margin: 0;
+    }
+    h1, h2, h3 {
+      padding: 5px;
+    }
+    .vw50 {
+      width: 50%;
+    }
+
+    @media screen and (max-width: 1023px) {
+      .vw50 {
+        width: 75%;
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      .vw50 {
+        width: 100%;
+      }
+    }
+
+    .vw33 {
+      width: 33%;
+    }
+  </style>
+</head>
+<body>
+<!-- this page is where you test your plugin during development -->
+<div id="app">
+  <h1>{{ title }}</h1>
+  <vue-responsive-image
+    :width-on-screen="50"
+    :width-on-screen-tablet="75"
+    :width-on-screen-smartphone="100"
+    :image-url="'http://via.placeholder.com/%width%x%height%.png'"
+    :show-error-image="true"
+    :error-image-url="'https://via.placeholder.com/160x90.png/09f/fff?text=Not+Found'"
+    :image-ratio="16/9"
+    :alt="'test1'"
+    :image-class="'vw50'"
+    :mode="'all'"
+    :lazy-loading="true"
+  ></vue-responsive-image>
+</div>
+
+
+
+
+</body>
+</html>

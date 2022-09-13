@@ -12,7 +12,8 @@ You need to have some system that automatically generates the images for you
 when an URL with the appropriate format is called, for example:
 http://via.placeholder.com/1920x1080
 
-Version 1.0 works with **Vue 2**. 
+The master branch contains the version 2.0 that works with **Vue 3**.
+The version compatible with **Vue 2** is in the branch 1.0.
  
 ## Standard Installation
 
@@ -109,7 +110,13 @@ sizes for the final images in the HTML, and the plugin calculates those for you.
 This is by far the most common use case according to my experience.
 
 ## Testing
-There is a unit test suite made with mocha-webpack. Just clone the project, install with npm, and run `npm run test`.
+There is a unit test suite made with:
+- mocha-webpack for the version 1.0
+- jest for the version 2.0
+
+Just clone the project, install with npm, and run:
+- `npm run test` for the version 1.0
+- `npm run test:unit` for the version 2.0
 
 ## Roadmap
 
