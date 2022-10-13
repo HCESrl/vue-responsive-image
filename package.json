@@ -1,6 +1,6 @@
 {
   "name": "vue-responsive-image",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "A Vue component to manage responsive images",
   "main": "src/ResponsiveImage.vue",
   "scripts": {
