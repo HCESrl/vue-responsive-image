@@ -1,9 +1,30 @@
 <template>
   <picture>
-    <source v-if="hasSmartphoneSrcset && !showError" :srcset="smartphoneSrcset" :sizes="smartphoneSizes" media="(max-width: 767px)">
-    <source v-if="hasTabletSrcset && !showError" :srcset="tabletSrcset" :sizes="tabletSizes" media="(min-width: 768px) and (max-width: 1023px)">
-    <img v-if="!showError" :src="defaultImage" :alt="alt" :class="[defaultClass, imageClass]" :srcset="srcset" :sizes="sizes" @error="onError">
-    <img v-else :src="errorImage" :alt="alt" :class="[defaultClass, imageClass, errorClass]">
+    <source
+      v-if="hasSmartphoneSrcset && !showError"
+      :srcset="smartphoneSrcset"
+      :sizes="smartphoneSizes"
+      media="(max-width: 767px)">
+    <source
+      v-if="hasTabletSrcset && !showError"
+      :srcset="tabletSrcset"
+      :sizes="tabletSizes"
+      media="(min-width: 768px) and (max-width: 1023px)">
+    <img
+      v-if="!showError"
+      :src="defaultImage"
+      :alt="alt"
+      :class="[defaultClass, imageClass]"
+      :loading="loadingMode"
+      :srcset="srcset"
+      :sizes="sizes"
+      @error="onError">
+    <img
+      v-else
+      :src="errorImage"
+      :alt="alt"
+      :class="[defaultClass, imageClass, errorClass]"
+      :loading="loadingMode">
   </picture>
 </template>
 
@@ -69,6 +90,11 @@ export default {
     maxWidth: {
       type: Number,
       default: 1920
+    },
+    // whether to trigger lazy loading or not
+    lazyLoading: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => {
@@ -108,6 +134,9 @@ export default {
     }
   },
   computed: {
+    loadingMode () {
+      return this.lazyLoading ? 'lazy' : null
+    },
     test () {
       return 'test'
     },
@@ -156,8 +185,7 @@ export default {
       return this.getSrcsetSizes('smartphone').map(
         (width) => {
           let finalWidth = this.getWidthAdaptedToWidthOnScreen(width, this.widthOnScreenSmartphone)
-          let result = this.getImageUrlWithWidthAndHeight(finalWidth, this.getHeightFromWidth(finalWidth)) + ` ${finalWidth}w`
-          return result
+          return this.getImageUrlWithWidthAndHeight(finalWidth, this.getHeightFromWidth(finalWidth)) + ` ${finalWidth}w`
         }
       ).join(', ')
     },
@@ -186,7 +214,7 @@ export default {
   watch: {
     imageUrl: {
       immediate: true,
-      handler (value, oldValue) {
+      handler () {
         this.hasError = false
         // console.log('image changed', value, oldValue)
       }
@@ -201,16 +229,12 @@ export default {
       switch (mode) {
         case 'tablet': // portrait
           return this.baseSizes.tabletPortrait
-          break;
         case 'smartphone':
           return this.baseSizes.smartphone
-          break;
         case 'mobile':
           return [...new Set([...this.baseSizes.tabletPortrait, ...this.baseSizes.smartphone])]
-          break;
         case 'desktop':
           return this.baseSizes.desktop
-          break;
         case 'all':
         default:
           return [...new Set([...this.baseSizes.desktop, ...this.baseSizes.tabletPortrait, ...this.baseSizes.smartphone])]

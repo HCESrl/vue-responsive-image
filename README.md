@@ -63,6 +63,7 @@ Complete set of options:
     :alt="'test1'"
     :image-class="'vw50'"
     :mode="'all'"
+    :lazy-loading="false"
   ></vue-responsive-image>
 ```
 
@@ -82,6 +83,7 @@ It currently supports the following parameters:
   <tr><td>alt</td><td>''</td><td>The alt attribute for the image</td></tr>
   <tr><td>class</td><td>''</td><td>The extra class(es) to be added to the image. The class "vue-reponsive-image" is added by default</td></tr>
   <tr><td>mode</td><td>'all'</td><td>Possible values: 'all', 'tablet', 'smartphone', 'mobile'. The desidered mode of operation for the main image, if only "mobile" is passed, then desktop sizes will not be generated, etc.</td></tr>
+  <tr><td>lazy-loading</td><td>false</td><td>Boolean - whether to enable the default HTML lazy loading mechanism, with attribute loading="lazy" set on the image if this attribute is set to true</td></tr>
 </table>
 
 
