@@ -184,4 +184,19 @@ describe('ResponsiveImage.vue', () => {
     let regExp = regexForSrcsetNTimes(3)
     expect(wrapper.findAll('source').at(1).attributes().srcset).toMatch(regExp)
   })
+  it('check that lazy loading is applied', () => {
+    let myTestAlt = 'myTestAlt'
+    const wrapper = mount(ResponsiveImage, {
+      propsData: {
+        imageUrl: 'http://via.placeholder.com/%width%x%height%',
+        widthOnScreen: 50,
+        widthOnScreenTablet: 75,
+        widthOnScreenSmartphone: 100,
+        lazyLoading: true,
+        alt: myTestAlt
+      }
+    })
+    let regExp = /lazy/
+    expect(wrapper.find('img').attributes().loading).toMatch(regExp)
+  })
 })
